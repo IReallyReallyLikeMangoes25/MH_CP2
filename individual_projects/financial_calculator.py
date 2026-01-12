@@ -1,7 +1,7 @@
 # MH 1st financial calculator project
 
 # asks user what they want to do (goal, interest, budget, discount, tip)
-choice = input("What do you want to do?\n1. Save to a goal\n2. Calculate interest\n3. Allocate a budget\n4. Calculate a discount\n5. Calculate a tip\n6. Quit")
+choice = input("What do you want to do?\n1. Save to a goal\n2. Calculate interest\n3. Allocate a budget\n4. Calculate a discount\n5. Calculate a tip\n6. Quit\n")
 
 # function for saving to a goal:
 def save_to_goal():
@@ -18,50 +18,51 @@ def save_to_goal():
 # function for compound interest calculator:
 def calcualte_interest():
     # asks how much is currently in their bank account
-    current_amount = float(input("How much is in your bank account?"))
+    current_amount = float(input("How much is in your bank account?\n"))
     # asks how many months they want to calculate for
-    months = float(input("How many months would you like to calculate for?"))
+    years = int(input("How many years would you like to calculate for?\n"))
     # asks their interest rate
-    rate = float(input("What is your interest rate?"))
+    rate = float(input("What is your interest rate?\n"))
         # function inside that takes in how much money they have, how many months, and their interest rate:
-    def compound(current_amount, months, rate):
+    def compound(amount, amount_of_years, interest_rate):
             # loops over how much money is in their account forevery month
-            for i in range(months):
+            for i in range(amount_of_years):
             # takes interest rate % out of current money
             # adds it to current money
-                current_amount += (current_amount/rate) * 100
+                amount += (interest_rate/100) * amount
         # return what they will have
-            return current_amount
+            return amount
     # returns calculation function
-    interest = f"At the end of {months} you will have {compound(current_amount, months, rate)} money in your bank account."
+    money = compound(current_amount, years, rate)
+    interest = f"At the end of {years} you will have {money} money in your bank account."
     return interest
 
 # function for budget allocator:
 def budget_allocator():
     while True:
     # asks user how much money they will be budgeting
-        amount = float(input("How much money will you be budgeting?"))
+        amount = float(input("How much money will you be budgeting?\n"))
         # asks what percentage they will allocate to savings
-        savings = float(input("What percentage will be allocated to savings?"))
+        savings = float(input("What percentage will be allocated to savings?\n"))
         # asks what percentage they will allocate to home
-        home = float(input("Wat percentage will be allocated to your home?"))
+        home = float(input("Wat percentage will be allocated to your home?\n"))
         # asks what percentage will be allocated to entertainment
-        entertainment = float(input("What percentage will be allocated to entertainment?"))
+        entertainment = float(input("What percentage will be allocated to entertainment?\n"))
         # asks what percentage will be allocated to food
-        food = float(input("What percentage will be allocated for food?"))
+        food = float(input("What percentage will be allocated for food?\n"))
         # adds up the percentages to make sure it's not over 100%
         # if it's over 100% ask user questions again
-            if (food + entertainment + home + savings + amount) <= 100:
-                break
+        if (food + entertainment + home + savings + amount) >= 10:
+            break
     # if it's not:
     # take savings percentage out of total
-    savings =  (amount/savings) * 100
+    savings =  (savings/100) * amount
     # take home percentage out of total
-    home = (amount/home) * 100
+    home = (home/100) * amount
     # take entertainment percentage out of total
-    entertainment = (amount/entertainment) * 100
+    entertainment = (entertainment/100) * amount
     # take food percentage out of total
-    food = (amount/food) * 100
+    food = (food/100) * amount
 
     budget  = f"Savings: {savings}\nHome: {home}\nEntertainment: {entertainment}\nFood: {food}"
     # return how much they can spend on everything
@@ -70,22 +71,22 @@ def budget_allocator():
 # function for discount calculator:
 def discount_calculator():
     # asks how much the item originally was
-    og_price = float(input("How much was the item originally?"))
+    og_price = float(input("How much was the item originally?\n"))
     # asks what percentage the discount is
-    discount = float(input("What percentage is the discount?"))
+    discount = float(input("What percentage is the discount?\n"))
     # take discount percentage out of original value
-    discounted = f"The discounted price is {og_price - ((og_price/discount) * 100)}"
+    discounted = f"The discounted price is {og_price - ((discount/100) * og_price)}"
     # returns discounted value
     return discounted
 
 # function for tip calculator:
 def tip_calculator():
     # asks how much they spent
-    spent = float(input("How much did you spend?"))
+    spent = float(input("How much did you spend?\n"))
     # asks how much they would like to tip
-    percentage = float(input("What percentage would you like to tip?"))
+    percentage = float(input("What percentage would you like to tip?\n"))
     # takes the tip percentage out of how much they spent
-    tip = f"You need to tip {(spent/percentage) * 100}"
+    tip = f"You need to tip {(percentage/100) * spent}"
     # return tip value
     return tip
 
