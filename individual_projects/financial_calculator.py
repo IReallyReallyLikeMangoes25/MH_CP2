@@ -1,8 +1,5 @@
 # MH 1st financial calculator project
 
-# asks user what they want to do (goal, interest, budget, discount, tip)
-choice = input("What do you want to do?\n1. Save to a goal\n2. Calculate interest\n3. Allocate a budget\n4. Calculate a discount\n5. Calculate a tip\n6. Quit\n")
-
 # function for saving to a goal:
 def save_to_goal():
     # asks what amount they are saving to
@@ -16,25 +13,21 @@ def save_to_goal():
 
 
 # function for compound interest calculator:
-def calcualte_interest():
+def calculate_interest():
     # asks how much is currently in their bank account
     current_amount = float(input("How much is in your bank account?\n"))
     # asks how many months they want to calculate for
-    years = int(input("How many years would you like to calculate for?\n"))
+    years = float(input("How many years would you like to calculate for?\n"))
     # asks their interest rate
     rate = float(input("What is your interest rate?\n"))
         # function inside that takes in how much money they have, how many months, and their interest rate:
     def compound(amount, amount_of_years, interest_rate):
-            # loops over how much money is in their account forevery month
-            for i in range(amount_of_years):
-            # takes interest rate % out of current money
-            # adds it to current money
-                amount += (interest_rate/100) * amount
+            total = amount * (1 + (interest_rate/100)) ** amount_of_years
         # return what they will have
-            return amount
+            return total
     # returns calculation function
     money = compound(current_amount, years, rate)
-    interest = f"At the end of {years} you will have {money} money in your bank account."
+    interest = f"At the end of {years} years you will have {money} in your bank account."
     return interest
 
 # function for budget allocator:
@@ -45,7 +38,7 @@ def budget_allocator():
         # asks what percentage they will allocate to savings
         savings = float(input("What percentage will be allocated to savings?\n"))
         # asks what percentage they will allocate to home
-        home = float(input("Wat percentage will be allocated to your home?\n"))
+        home = float(input("What percentage will be allocated to your home?\n"))
         # asks what percentage will be allocated to entertainment
         entertainment = float(input("What percentage will be allocated to entertainment?\n"))
         # asks what percentage will be allocated to food
@@ -91,13 +84,15 @@ def tip_calculator():
     return tip
 
 # loop that runs until they quit
+print("Hello! Welcome to Mirai's financial calculator, some instructions you should know are a sfollows:\n1. When asked for a percentage please input it without the percentage symbol\n2. If asked for an amount of something please only put the amount and not a name")
 while True:
+    choice = input("What do you want to do?\n1. Save to a goal\n2. Calculate interest\n3. Allocate a budget\n4. Calculate a discount\n5. Calculate a tip\n6. Quit\n")
     # if the user goal run the goal function
     if choice == "1":
         print(save_to_goal())
     # if the user says interest run the interest function
     elif choice == "2":
-        print(calcualte_interest())
+        print(calculate_interest())
     # if the user wants to budget run the budget function
     elif choice == "3":
         print(budget_allocator())
@@ -110,5 +105,5 @@ while True:
     elif choice == "6":
         break
     else:
-        choice = input("What do you want to do?\n1. Save to a goal\n2. Calculate interest\n3. Allocate a budget\n4. Calculate a discount\n5. Calculate a tip\n6. Quit")
+        choice = input("What do you want to do?\n1. Save to a goal\n2. Calculate interest\n3. Allocate a budget\n4. Calculate a discount\n5. Calculate a tip\n6. Quit\n")
         continue
