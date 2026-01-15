@@ -44,6 +44,7 @@ def add():
 
 # search function, takes in dictionary
 def search(rocks):
+    in_collection = False
     # asks user what they want to search for (rock/mineral name or rock/mineral type)
     search = input("What would you like to search for:\n1. Rock/Mineral name\n2. Rock/Mineral type")
     while True:
@@ -51,26 +52,34 @@ def search(rocks):
         if search == "1":
             name = input("What is the rock/mineral you are searching for?\n")
             # if it's in the dictionary print out it's key value pair
-            if name in rocks:
-                print(rocks(name))
+            for key, value in rocks.items():
+                if key == name:
+                    print(f"{key}, {value}")
+                    in_collection == True
             # if it's not in the dictionary display that it is not in the dictionary
-            else:
+            if in_collection == False:
                 print("That is not in your collection.")
             break
         # if they want to search for type, as them for a rock?mineral type
         elif search == "2":
-            type = input("What type of rock/mineral are you searching for?\n")
+            type_of_rock = input("What type of rock/mineral are you searching for?\n")
             # if it's in the dictionary print out it's key value pair
-            for i in rocks:
-                pass
+            for key, value in rocks.items():
+                if value == type_of_rock:
+                    print(f"{key}, {value}")
+                    in_collection == True
             # if it's not in the dictionary display that it is not in the dictionary
+            if in_collection == False:
+                print("That is not in your collection.")
             break
         else:
             print("That is not an option.")
             search = input("What would you like to search for:\n1. Rock/Mineral name\n2. Rock/Mineral type")
 
 # menu function
+def menu():
     # tuple containing strings that say the options of what to do
+    options = ()
     # print the tuple
     # ask user what they would like to do from the given options
     # if they want to view run the view function
