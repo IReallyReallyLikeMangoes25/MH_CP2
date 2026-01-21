@@ -93,10 +93,12 @@ def menu():
         elif choice == "2":
             new_name, new_type = add()
             collection[new_name] = new_type
+            print("Added")
     # if they want to remove run the remove function
         elif choice == "3":
             delete = remove(collection)
             del collection[delete]
+            print("Removed")
     # if they want to search run the search function
         elif choice == "4":
             search(collection)
