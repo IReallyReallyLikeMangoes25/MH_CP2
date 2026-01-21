@@ -1,7 +1,7 @@
 # MH 1st personal library project
 
 # dictionary for all rocks/minerals
-collection = {}
+collection = {"Clastic":"Sedimentary"}
 
 # view function, takes in dictionary
 def view_collection(rocks):
