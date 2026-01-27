@@ -20,75 +20,100 @@ def generate(password_length, upper_list, lower_list, special_list, nums_list, u
         # loop that runs until password is preffered length
         for item in range(password_length):
             # generate random number 1-4
-            list = random.randint(1, 4)
+            add = random.randint(1, 4)
             # if the number is one add a random uppercase letter
-            if list == 1:
-                passwords[password.extend(upper_list[random.randint(0, 26)])]
+            if add == 1:
+                passwords[password] += upper_list[random.randint(0, 25)]
             # if the number is two add a random number
-            if list == 2:
-                passwords[password.extend(nums_list[random.randint(0, 9)])]
+            if add == 2:
+                passwords[password] += nums_list[random.randint(0, 8)]
             # if the number is three add a random special character
-            if list == 3:
-                passwords[password.extend(special_list[random.randint])]
+            if add == 3:
+                passwords[password] += special_list[random.randint(0, 12)]
             # if the number is four add a random lowercase letter
-            if list == 4:
-                passwords[password.extend(lower_list[random.randint])]
+            if add == 4:
+                passwords[password] += lower_list[random.randint(0, 25)]
         # if capitals shouldn't be used:
         if use_capitals == "n":
             # password loop function run for capitals
-            passwords[password] = remove(upper_list, lower_list, nums_list, special_list, password)
+            passwords[password] = remove(upper_list, lower_list, nums_list, special_list, passwords[password])
         # if lowercase shouldn't be used:
         if use_lowercase == "n":
             # password loop function run for lowercase
-            passwords[password] = remove(upper_list, lower_list, nums_list, special_list, password)
+            passwords[password] = remove(lower_list, upper_list, nums_list, special_list, passwords[password])
         # if numbers shouldn't be used:
         if use_numbers == "n":
             # password loop function run for numbers
-            passwords[password] = remove(upper_list, lower_list, nums_list, special_list, password)
+            passwords[password] = remove(nums_list, lower_list, upper_list, special_list, passwords[password])
         # if special characters shouln't be used:
         if use_specials == "n":
             # password function run for special characters
-            passwords[password] = remove(upper_list, lower_list, nums_list, special_list, password)
+            passwords[password] = remove(special_list, lower_list, nums_list, upper_list, passwords[password])
         # save fixed password
+        print(passwords[password])
 
 # function that loops through the password to change certain items, takes in a condition to change by and the lists:
 def remove(condition, keep_1, keep_2, keep_3, incomplete_password):
+    incomplete_password = list(incomplete_password)
     # loop going over the password:
-    for item in incomplete_password:
+    for char in incomplete_password:
         # if this item in the password contains the condition:
-        if item in condition:
+        if char in condition:
             # generate random number 1-3 to choose a list (cannot be the list they said not to use)
-            list = random.randint(1-3)
+            add = random.randint(1, 3)
             # changes the item to another randomly generated character
-            if list == 1:
-                incomplete_password.index[item] = keep_1[random.randint(1, len(keep_1))]
-            if list == 2:
-                incomplete_password.index[item] = keep_2[random.randint(1, len(keep_2))]
-            if list == 3:
-                incomplete_password.index[item] = keep_3[random.randint(1, len(keep_3))]
+            if add == 1:
+                incomplete_password[incomplete_password.index(char)] = keep_1[random.randint(0, len(keep_1) - 1)]
+            if add == 2:
+                incomplete_password[incomplete_password.index(char)] = keep_2[random.randint(0, len(keep_2) - 1)]
+            if add == 3:
+                incomplete_password[incomplete_password.index(char)] = keep_3[random.randint(0, len(keep_3) - 1)]
+    incomplete_password = "".join(incomplete_password)
     return incomplete_password
 
 # main function:
 def main():
     # loop that runs until they want to exit
     while True:
+        good_choices = False
     # ask if they would like to generate passwords
-        what_to_do = input("What would you like to do:\n1. Generate Paswords\n2. Exit")
+        what_to_do = input("What would you like to do:\n1. Generate Paswords\n2. Exit\n")
     # if they do:
         if what_to_do == "1":
-            # ask user preffered length
-            length = int(input("How long should the passwords be?\n"))
-            # ask user if capitals should be used
-            capitals_prefference = input("Should capital letters be used? (Y/N)").lower().strip()
-            # ask user if lowercase should be used
-            lowercase_prefference = input("Should lowercase letters be used/ (Y/N)").lower().strip()
-            # ask user if special characters should be used
-            special_prefference = input("Should special characters be used? (Y/N)").lower().strip()
-            # ask user if numbers should be used
-            numbers_prefference = input("Should numbers be used? (Y/N)").lower().strip()
-            # run generation function on their prefferences and print results
-            generate(length, uppercase, lowercase, special_characters, numbers, capitals_prefference, lowercase_prefference, numbers_prefference, special_prefference)
+            while True:
+                # ask user preffered length
+                length = input("How long should the password be?\n")
+                if length not in numbers:
+                    continue
+                else:
+                    int_length = int(length)
+                    break
+            while good_choices == False:
+                choices = []
+                # ask user if capitals should be used
+                capitals_prefference = input("Should capital letters be used? (Y/N)\n").strip().lower()
+                choices.append(capitals_prefference)
+                # ask user if lowercase should be used
+                lowercase_prefference = input("Should lowercase letters be used? (Y/N)\n").strip().lower()
+                choices.append(lowercase_prefference)
+                # ask user if special characters should be used
+                special_prefference = input("Should special characters be used? (Y/N)\n").strip().lower()
+                choices.append(special_prefference)
+                # ask user if numbers should be used
+                numbers_prefference = input("Should numbers be used? (Y/N)\n").strip().lower()
+                choices.append(numbers_prefference)
+                for i in choices:
+                    if i != "y" or "n":
+                        good_choices = True
+        # run generation function on their prefferences and print results
+            if capitals_prefference and lowercase_prefference and special_prefference and numbers_prefference == "n":
+                print("If you don't actually want to generate a password then exit.")
+                continue
+            else:
+                generate(int_length, uppercase, lowercase, special_characters, numbers, capitals_prefference, lowercase_prefference, numbers_prefference, special_prefference)
         if what_to_do == "2":
             break
         else:
             continue
+
+main()
