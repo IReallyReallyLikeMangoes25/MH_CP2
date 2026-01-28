@@ -83,7 +83,7 @@ def main():
             while True:
                 # ask user preffered length
                 length = input("How long should the password be?\n")
-                if length not in numbers:
+                if length.isdigit == False:
                     continue
                 else:
                     int_length = int(length)
