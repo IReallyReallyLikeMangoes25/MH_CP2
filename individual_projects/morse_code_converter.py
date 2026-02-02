@@ -6,8 +6,13 @@ english = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
 morse_code = (".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..")
 
 # function to convert morse code to english, takes in a code:
+def code_to_english(code, code_alphabet, english_alphabet):
+    decoded = ""
     # loops over sequences in the code, if the sequence is in morse code it finds the corresponding sequence in english and adds it to a list
+    for seqeunce in code:
     # if the given character is not in morse code print that the sentence to decode is not valid
+        if sequence in code_alphabet:
+            decoded.extend(english_alphabet[code_alphabet.index(sequence)]
     # once the list is done convert it to a string and return the string
 
 # function to convert english to morse code, takes in a message:
