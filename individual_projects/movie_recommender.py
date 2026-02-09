@@ -1,11 +1,26 @@
 # MH 2nd Movie recommender project
-
+import csv
+with open("individual_projects/Movies list.py", mode = "r") as movie_list
 # function to load csv file:
+def load_csv(movies):
+    movies = csv.reader(movies)
+    headers = next(movies)
+    rows = []
+    for line in movies:
+        rows.append({headers[0] : line[0], headers[1] : line[1], headers[3] : line[3], headers[4] : line[4], headers[5] : line[5], headers[6], line[6]})
+    return rows
 
 # function for searching for genre:
+def search_genre(movies):
+    movies_with_genre = []
     # ask user what genre they are looking for
+    desired_genre = input("What genre are you searching for?").strip().lower().title()
     # loop through the genre section of the file and if any movies are that genre save them inside a list in this function
+    for movie in movies:
+        if desired_genre in movies["Genre"]:
+            movies_with_genre.append(movie)
     # return the list of movies with that genre
+    return movies_with_genre
 
 # function for searching for director:
     # ask user what director they are looking for
@@ -37,8 +52,10 @@
     # return the list of movies
 
 # print search results function, takes in list of movies:
+    # loops over list printing movies one by one
 
 # print full list function:
+    # loops over list printing movies one by one
 
 # menu function:
     # ask is user wants to print the full list, search, or exit
