@@ -181,6 +181,7 @@ def print_all(movies):
 
 # menu function:
 def menu(movies):
+    print("Welcome to Mirai's movie reccomender. You can search by genre, director, length, and actors. Have fun.")
     while True:
         # ask is user wants to print the full list, search, or exit
         what_to_do = input("\nWhat do you want to do?\n1. Print full list\n2. Search\n3. Exit\n")
