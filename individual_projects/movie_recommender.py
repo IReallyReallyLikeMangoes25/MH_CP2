@@ -1,9 +1,10 @@
 # MH 2nd Movie recommender project
 import csv
 import math
+import os
 # function to load csv file:
 def load_csv():
-    with open("test.py/Movies list.csv", "r",) as movies:
+    with open("individual_projects/Movies list.csv", "r",) as movies:
         content = csv.reader(movies)
         headers = next(content)
         rows = []
@@ -23,7 +24,7 @@ def search_genre(movies):
             movies_with_genre.append(movie)
     # return the list of movies with that genre
     if len(movies_with_genre) == 0:
-        movies_with_genre = "There are no movies with this genre in the list."
+        movies_with_genre = "There are no movies with this genre in the list. (If you put in Sci-Fi make sure you have not spelled it out and used a dash instead.)"
     return movies_with_genre
 
 # function for searching for director:
@@ -65,27 +66,52 @@ def search_actors(movies):
 
 # function for searching for length:
 def search_length(movies):
-    ideal_length_movies = []
-    minimum = 0
-    maximum = math.inf
-    # ask if they want to search for minimum, maximum, or both
-    choice = input("What do you want to search for?\n1.Minimum\n2. Maximum\n3. Both\n")
-    # if they say minimum ask for the minimum length and set maximum to infinite
-    if choice == "1":
-        minimum = input("What is the minimum desired length?\n")
-        minimum = int(minimum)
-    # if they say maximum ask for maximum length and set minimum to 0
-    elif choice == "2":
-        maximum = input("What is the maximum desired length?\n")
-        maximum = int(maximum)
-    # if they say both ask for both
-    elif choice == "3":
-        minimum = input("What is the minimum desired length?\n")
-        minimum = int(minimum)
-        maximum = input("What is the maximum desired length\n")
-        maximum = int(maximum)
-    else:
-        print("That isn't an option")
+    while True:
+        ideal_length_movies = []
+        minimum = 0
+        maximum = math.inf
+        # ask if they want to search for minimum, maximum, or both
+        choice = input("What do you want to search for?\n1. Minimum\n2. Maximum\n3. Both\n")
+        # if they say minimum ask for the minimum length and set maximum to infinite
+        if choice == "1":
+            while True:
+                minimum = input("What is the minimum desired length?\n")
+                if minimum.isdigit() == False:
+                    continue
+                else:
+                    minimum = int(minimum)
+                    break
+            break
+        # if they say maximum ask for maximum length and set minimum to 0
+        elif choice == "2":
+            while True:
+                maximum = input("What is the maximum desired length?\n")
+                if maximum.isdigit() == False:
+                    continue
+                else:
+                    maximum = int(maximum)
+                    break
+            break
+        # if they say both ask for both
+        elif choice == "3":
+            while True:
+                minimum = input("What is the minimum desired length?\n")
+                if minimum.isdigit() == False:
+                    continue
+                else:
+                    minimum = int(minimum)
+                    break
+            while True:
+                maximum = input("What is the maximum desired length?\n")
+                if maximum.isdigit() == False:
+                    continue
+                else:
+                    maximum = int(maximum)
+                    break
+            break
+        else:
+            print("That isn't an option")
+            continue
     for movie in movies:
         if movie["Length (min)"] >= minimum and movie["Length (min)"] <= maximum:
             ideal_length_movies.append(movie)
@@ -98,28 +124,40 @@ def search_length(movies):
 
 # function for searching using selected filters, takes in what filters they chose:
 def search_with_filters(filter_one, filter_two, movies):
-    filter_actors = movies
-    filter_director = movies
-    filter_genre = movies
-    filter_length = movies
-    two_filter_movies = movies
+    two_filter_movies = []
+    first_filter = []
+    second_filter = []
     # if they chose to search for genre run the search for genre function
-    if filter_one or filter_two == "1":
-        filter_genre = search_genre(movies)
+    if filter_one == "1":
+        first_filter = search_genre(movies)
     # if they chose to search for director run the the search for director function
-    if filter_one or filter_two == "2":
-        filter_director = search_director(movies)
+    elif filter_one == "2":
+        first_filter = search_director(movies)
     # if they chose to search for actors run the search for actors function
-    if filter_one or filter_two == "3":
-        filter_actors = search_actors(movies)
+    elif filter_one == "3":
+        first_filter = search_actors(movies)
     # if they chose to search for lenght run the search for length function
-    if filter_one or filter_two == "4":
-        filter_length = search_length(movies)
+    elif filter_one == "4":
+        first_filter = search_length(movies)
+
+    if filter_two == "1":
+        second_filter = search_genre(movies)
+    elif filter_two == "2":
+        second_filter = search_director(movies)
+    elif filter_two == "3":
+        second_filter = search_actors(movies)
+    elif filter_two == "4":
+        second_filter = search_length(movies)
     # take the two lists that were returned by two of the functions and loop over both, seeing if any movies are in both
-    for movie in filter_actors:
-        if movie in filter_director or filter_genre or filter_length:
+    if isinstance(first_filter, str) or isinstance(second_filter, str) == True:
+        two_filter_movies = "There are no movies meeting both of these criteria. Please consider removing or changing a filter."
+        return two_filter_movies
+    for movie in first_filter:
     # if a movie is in both add it to a new list inside this function
+        if movie in second_filter:
             two_filter_movies.append(movie)
+    if len(two_filter_movies) == 0:
+        two_filter_movies = "There are no movies meeting both of these criteria. Please consider removing or chaning a filter."
     # return the list of movies
     return two_filter_movies
 
@@ -130,47 +168,67 @@ def search_results(movies):
         else:
         # loops over list printing movies one by one
             for movie in movies:
-                print(movie)
+                for key, value in movie.items():
+                    print(f"{key} : {value}", end = ", ")
 
 # print full list function, takes in full list:
 def print_all(movies):
     # loops over list printing movies one by one
     for movie in movies:
-        print(f"{movie}")
+        print("\n")
+        for key, value in movie.items():
+            print(f"{key} : {value}", end = ", ")
 
 # menu function:
 def menu(movies):
     while True:
         # ask is user wants to print the full list, search, or exit
-        what_to_do = input("What do you want to do?\n1. Print full list\n2. Search\n3. Exit\n")
+        what_to_do = input("\nWhat do you want to do?\n1. Print full list\n2. Search\n3. Exit\n")
+        os.system("cls")
         # if they want to print the full list run the print full list function
         if what_to_do == "1":
             print_all(movies)
         # if they want to search print search options
         elif what_to_do == "2":
+            while True:
             # ask if they will be searching for one or two filters
-            filter_amount = input("How many filters would you like to apply (1/2)\n")
-        # if they choose one ask for it then run the corresponding search function and print the resuts with the print searvch results function
-            if filter_amount == "1":
-                chosen_filter = input("What filter would you like to apply?\n1. Genre\n2. Director\n3. Actors\n4. Length\n")
-                if chosen_filter == "1":
-                    search_results(search_genre(movies))
-                if chosen_filter == "2":
-                    search_results(search_director(movies))
-                if chosen_filter == "3":
-                    search_results(search_actors(movies))
-                if chosen_filter == "4":
-                    search_results(search_length(movies))
-        # if they want to search for two ask user for both and run the search using selected filters function and print the results with the print search results function
-            if filter_amount == "2":
-                chosen_filter_one = input("What filter would you like to apply?\n1. Genre\n2. Director\n3. Actors\n4. Length\n")
-                chosen_filter_two = input("What filter would you like to apply?\n1. Genre\n2. Director\n3. Actors\n4. Length\n")
-                search_results(search_with_filters(chosen_filter_one, chosen_filter_two, movies))
+                filter_amount = input("How many filters would you like to apply (1/2)\n")
+            # if they choose one ask for it then run the corresponding search function and print the resuts with the print searvch results function
+                if filter_amount == "1":
+                    while True:
+                        chosen_filter = input("What filter would you like to apply?\n1. Genre\n2. Director\n3. Actors\n4. Length\n")
+                        if chosen_filter == "1":
+                            search_results(search_genre(movies))
+                            break
+                        elif chosen_filter == "2":
+                            search_results(search_director(movies))
+                            break
+                        elif chosen_filter == "3":
+                            search_results(search_actors(movies))
+                            break
+                        elif chosen_filter == "4":
+                            search_results(search_length(movies))
+                            break
+                        else: continue
+            # if they want to search for two ask user for both and run the search using selected filters function and print the results with the print search results function
+                elif filter_amount == "2":
+                    while True:
+                        chosen_filter_one = input("What is the first filter you would like to apply?\n1. Genre\n2. Director\n3. Actors\n4. Length\n")
+                        if chosen_filter_one == "1" or chosen_filter_one == "2" or chosen_filter_one == "3" or chosen_filter_one == "4":
+                            break
+                        else: continue
+                    while True:
+                        chosen_filter_two = input("What is the second filter you would like to apply?\n1. Genre\n2. Director\n3. Actors\n4. Length\n")
+                        if chosen_filter_two == "1" or chosen_filter_two == "2" or chosen_filter_two == "3" or chosen_filter_two == "4":
+                            break
+                        else: continue
+                    search_results(search_with_filters(chosen_filter_one, chosen_filter_two, movies))
+                    break
+                else: continue
         # if they want to exit, exit the code
         if what_to_do == "3":
             break
         # if their input is invalid ask again
-        else:
-            continue
+        else: continue
 movie_list = load_csv()
 menu(movie_list)
