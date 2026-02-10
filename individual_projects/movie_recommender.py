@@ -83,9 +83,10 @@ def search_length(movies):
     return ideal_length_movies
 
 # function for searching using selected filters, takes in what filters they chose:
-def search_with_filters(filter_one, filter_two):
+def search_with_filters(filter_one, filter_two, movies):
     # if they chose to search for genre run the search for genre function
-    if filter_one or filter_two = 
+    if filter_one or filter_two == "1":
+        search_genre(movies)
     # if they chose to search for director run the the search for director function
     # if they chose to search for actors run the search for actors function
     # if they chose to search for lenght run the search for length function
