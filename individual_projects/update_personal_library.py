@@ -1,11 +1,24 @@
 # Mh first update personal library program
 
-# add simple display function
-# add ful display function
-# add update function
+# add full display function
+# add update function, takes in the collection dictionary
+def update(rock_collection):
+    # asks user 
 
-# dictionary for all rocks/minerals
-collection = {"Clastic":"Sedimentary"}
+# add load csv function
+def load_csv():
+    # loops over csv and converts lines into dictionaries
+    with open("individual_projects/collection.csv", "r") as collection:
+        content = csv.reader(collection)
+        headers = next(content)
+        rows = []
+        for line in content:
+            rows.append({headers[0] : line[0], headers[1] : line[1], headers[2] : line[2], headers[3] : line[3]})
+        return rows
+
+# add save changes function that takes in the rock collection dictionary
+def save_changes(rock_collection):
+    # loops over csv and dictionary changing every line of the csv to be the same as in the dictionary.
 
 # view function, takes in dictionary
 def view_collection(rocks):
