@@ -1,2 +1,12 @@
-name,category,crystal system,formula
+Name,Category,Crystal System,Formula
 Andesine,Tectosilicate Minerals,Triclinic,"(Ca,Na)(Al,Si)4O8, where Ca/(Ca + Na) is between 30–50%"
+Quartz,Tectosilicate Mineral,Trigonal,SiO2
+Feldspar,Tectosilicate Mineral,Monoclinic,KAlSi3O8 - NaAlSi3O8 - CaAl2Si2O8
+Mica,Phyllosilicate Mineral,Monoclinic,KAl2(AlSi3O10)(OH)2
+Calcite,Carbonate Mineral,Trigonal,CaCO3
+Granite,Igneous Rock,N/A,"Quartz, Feldspar, Mica"
+Basalt,Igneous Rock,N/A,"Plagioclase, Pyroxene, Olivine"
+Sandstone,Sedimentary Rock,N/A,"Quartz, Feldspar, Rock Fragments"
+Limestone,Sedimentary Rock,N/A,"Calcite, Aragonite"
+Marble,Metamorphic Rock,N/A,"Calcite, Dolomite"
+Gneiss,Metamorphic Rock,N/A,"Quartz, Feldspar, Mica"
