@@ -1,8 +1,8 @@
 # MH second main word counter page
 
 # import from other files
-from management_file import *
-from time_file import *
+from word_counter_mangement import *
+from word_counter_time import *
 
 file_path = get_file()
 last_updated = update_time(file_path)

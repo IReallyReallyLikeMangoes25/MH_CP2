@@ -1,7 +1,7 @@
 # MH 1st word counter management file
 
 from pathlib import Path
-from time_file import *
+from word_counter_time import *
 
 # word count function:
 def count_words(relative_path):
