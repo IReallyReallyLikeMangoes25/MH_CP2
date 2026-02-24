@@ -1,8 +1,20 @@
-# MH second word counter file update page
+# MH 1st word counter management file
 
-# import from other files
-from word_counter_time import *
 from pathlib import Path
+from time_file import *
+
+# word count function:
+def count_words(relative_path):
+    words = 0
+    # loops over the file counting every word
+    with open(relative_path, "r") as file:
+        content = file.readlines()
+        for line in content:
+            if "Updated : " not in line and "Word count : " not in line and line != "\n":
+                line = line.split()
+                words += len(line)
+    # returns the amount of words
+    return words
 
 # get file function:
 def get_file():
@@ -24,17 +36,17 @@ def get_file():
 # update file function:
 def update_file(words, relative_path):
     # asks user what they want to add to the file
-    to_add = input("\nType below hat you would like to add:\n")
+    to_add = input("\nType below what you would like to add:\n")
     with open(relative_path, "a") as file:
-        file.write(f"\n{to_add}")
+        file.write(f"\n\n{to_add}")
     # uses save time function to get the time updated
     time_updated = save_time()
     # runs word count function
-    words = count_words(to_add, relative_path)
+    words = count_words(relative_path)
     # adds new text to the file
     # adds time updated and word count
     with open(relative_path, "a") as file:
-        file.write(f"\n\nUpdated : {time_updated}\nWord count : {words}")
+        file.write(f"\n\nWord count : {words}\nUpdated : {time_updated}")
     # returns word count, time updated, and what they added for use later
     return time_updated, words
 
@@ -47,13 +59,3 @@ def view_file(words, relative_path):
         else:
             content = file.read()
             print(content)
-
-# word count function:
-def count_words(relative_path):
-    # loops over the file counting every word
-    with open(relative_path, "r") as file:
-        content = file.read()
-        words = content.split()
-        count = len(words)
-    # returns the amount of words
-    return count
