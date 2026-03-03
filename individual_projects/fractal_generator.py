@@ -1,6 +1,6 @@
 # MH 1st fractal generation file
 
-from positions import *
+from position_tracker import *
 from draw_triangle import *
 
 # function to draw fractal, takes in depth, color, and side length
