@@ -27,7 +27,7 @@ def lotion_release(name):
     return 7, source
 
 def bank_robbery(name):
-    print(f"The news reports on a bank robbery with a cctv footage showing the robber to look INCREBIBLY similar to {name}... You decide it's best to ignore it and keep the cash you found in the fridge. You get 100 dollars. + Cash I guess? + On the LAM status?")
+    print(f"The news reports on a bank robbery with a cctv footage showing the robber to look INCREBIBLY similar to {name}... You decide it's best to ignore it and keep the cash you found in the fridge. You get 100 glorps. + Cash I guess? + On the LAM status?")
     source = "cash money baby"
     return 100
 

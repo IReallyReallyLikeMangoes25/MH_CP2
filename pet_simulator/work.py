@@ -2,3 +2,4 @@
 
 # NEEDS:
 # simple game to award in-game money
+# glorpcoin functions n stuff
