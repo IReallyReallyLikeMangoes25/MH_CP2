@@ -31,8 +31,8 @@ def create_pet(pets, species):
         print(f"{i}. {animal}")
     # asks what species the pet is
     while True:
-        species_choice = input("\nPlease input the number corresponding to the species you choose: ")
-        if int(species_choice) > len(species) or int(species_choice) < len(species):
+        species_choice = input("\nWhat species will your new pet be: ")
+        if int(species_choice) > len(species):
             print("\nThat is not an option.")
             continue
         else: break
@@ -55,9 +55,11 @@ def view_stats(pets):
     # asks which pet they would lke to view
     while True:
         choice = input("what pet would you like to see the stats of: ")
-        if choice not in pets:
+        if int(choice) > len(pets):
             continue
-        else: break
+        else: 
+            choice = pets[choice]
+            break
     # finds that pet in the list and prints all it's stats besides status
     for pet in pets:
         if pet.name == choice:
@@ -65,14 +67,13 @@ def view_stats(pets):
         else:
             continue
 
-
 # abandon function, takes in pet list:
 def abandon(pets):
     view_all(pets)
     # asks which pet to get rid of
     while True:
         choice = input("What pet would you like to get rid of (This is permanent!): ")
-        if choice not in pets:
+        if int(choice) > len(pets):
             continue
         else: break
     # finds that pet in the list and removes it
@@ -90,9 +91,11 @@ def select_new(pets, current):
     # print list of pets and ask user which they would like to play with
     while True:
         choice = input("Which pet do you want to get out: ")
-        if choice not in pets:
+        if int(choice) > len(pets):
             continue
-        else: break
+        else: 
+            choice = pets[choice]
+            break
     # set that pet's status to "active"
     for pet in pets:
         if pet.name == current:
@@ -101,48 +104,3 @@ def select_new(pets, current):
             pet.status = "active"
     current = choice
     return pets, current
-
-
-def save_inventory(inventory):
-    fieldnames = ["name", "price", "use", "category"]
-    with open("pet_simulator/inventory.csv", "w", newline = "") as inventory_csv:
-    # updates whole csv with inventory
-        writer = csv.DictWriter(inventory_csv, fieldnames = fieldnames)
-        writer.writeheader()
-        writer.writerows(inventory)
-
-
-# load inventory csv function:
-def load_inventory():
-    # opens and saves csv as a list
-    with open("pet_simulator/inventory.csv", "r") as inventory_csv:
-        content = csv.reader(inventory.csv)
-        row_count = sum(1 for row in content)
-        collection.seek(0)
-        if row_count == 0:
-            headers = ["name", "price", "use", "category"]
-        else:
-            headers = next(inventory_csv)
-        rows = []
-        for line in content:
-            rows.append({headers[0] : line[0], headers[1] : line[1], headers[2] : line[2], headers[3] : line[3]})
-    # returns inventory list
-    return rows
-
-
-# load shop items csv function:
-def load_shop():
-    # opens and saves csv as a list
-    with open("pet_simulator/shop_items.csv", "r") as shop_items:
-        content = csv.reader(inventory.csv)
-        row_count = sum(1 for row in content)
-        collection.seek(0)
-        if row_count == 0:
-            headers = ["item", "price", "use", "category"]
-        else:
-            headers = next(shop_items)
-        rows = []
-        for line in content:
-            rows.append({headers[0] : line[0], headers[1] : line[1], headers[2] : line[2], headers[3] : line[3]})
-    # returns shop list
-    return rows

@@ -5,13 +5,13 @@
 # function to load inventory csv
 # function to load shop items csv
 
-
+import csv
 # save to inventory csv function, takes in inventory:
 def save_inventory(inventory):
     fieldnames = ["name", "price", "use", "category"]
     # updates whole csv with inventory
     with open("pet_simulator/inventory.csv", "w", newline = "") as inventory_csv:
-        writer = csv.DictWriter(collection, fieldnames = fieldnames)
+        writer = csv.DictWriter(inventory_csv, fieldnames = fieldnames)
         writer.writeheader()
         writer.wrtierows(inventory)
 
@@ -22,7 +22,7 @@ def load_inventory():
     with open("pet_simulator/inventory.csv", "r") as inventory_csv:
         content = csv.reader(inventory_csv)
         row_count = sum(1 for row in content)
-        collection.seek(0)
+        content.seek(0)
         if row_count == 0:
             headers = ["name", "price", "use", "category"]
         else:
@@ -39,7 +39,7 @@ def load_shop():
     with open("pet_simulator/shop_items.csv", "r") as inventory_csv:
         content = csv.reader(inventory_csv)
         row_count = sum(1 for row in content)
-        collection.seek(0)
+        content.seek(0)
         if row_count == 0:
             headers = ["name", "price", "use", "category"]
         else:
