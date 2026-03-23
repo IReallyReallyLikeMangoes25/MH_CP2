@@ -51,10 +51,22 @@ def view_stats(pets):
             continue
 
 # abandon function, takes in pet list:
+def abandon(pets):
+    view_all(pets)
     # asks which pet to get rid of
+    while True:
+        choice = input("Which pet do you want to get rid of (This is permanent!): ")
+        if choice not in pets:
+            continue
+        else: break
     # finds that pet in the list and removes it
+    pets.pop(choice)
+    print("/n Pet Removed")
     # returns updated list
+    return pets
 
 # select new pet function:
+def select_pet(pets):
     # print list of pets and ask user which they would like to play with
+    view_all(pets)
     # set that pet's status to "active"
