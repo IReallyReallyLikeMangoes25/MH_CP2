@@ -7,7 +7,7 @@
 def purchase(shop_items, money, inventory):
     # prints all items
     for i, item in shop_items:
-        print(f"{i}. {item}, {item["price"]}")
+        print(f"{i}. {item}, {item["price"]} Glorpcoin")
     # asks player what they want to purchase
     while True:
         choice = input("Which item would you like to purchase: ")
@@ -41,3 +41,16 @@ def sell(inventory, money):
     money += choice["price"]
     # return how much it was sold for and the updated inventory
     return inventory, money
+
+def pet_shop(shop_items, money, inventory):
+    while True:
+            choice = input("What would you like to do:\n1. Purchase\n2. Sell\n")
+            if choice == "1":
+                inventory, money = purchase(shop_items, money, inventory)
+                return inventory, money
+            elif choice == "2":
+                inventory, money = sell(shop_items, money, inventory)
+                return inventory, money
+            else:
+                print("That is not an option.")
+                continue
