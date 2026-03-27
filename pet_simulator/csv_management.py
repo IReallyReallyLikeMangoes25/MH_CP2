@@ -12,7 +12,7 @@ import csv
 def save_inventory(inventory):
     fieldnames = ["name", "price", "use", "category"]
     # updates whole csv with inventory
-    with open(".vscode\pet_simulator.py\inventory.csv", "w", newline = "") as inventory_csv:
+    with open("pet_simulator/inventory.csv", "w", newline = "") as inventory_csv:
         writer = csv.DictWriter(inventory_csv, fieldnames = fieldnames)
         writer.writeheader()
         writer.writerows(inventory)
@@ -21,7 +21,7 @@ def save_inventory(inventory):
 # load inventory csv function:
 def load_inventory():
     # opens and saves csv as a list
-    with open(".vscode\pet_simulator.py\inventory.csv", "r") as inventory_csv:
+    with open("pet_simulator/inventory.csv", "r") as inventory_csv:
         content = csv.reader(inventory_csv)
         row_count = sum(1 for row in content)
         inventory_csv.seek(0)
@@ -38,7 +38,7 @@ def load_inventory():
 # load shop items csv function:
 def load_shop():
      # opens and saves csv as a list
-    with open(".vscode\pet_simulator.py\shop_items.csv", "r") as inventory_csv:
+    with open("pet_simulator/shop_items.csv", "r") as inventory_csv:
         content = csv.reader(inventory_csv)
         row_count = sum(1 for row in content)
         inventory_csv.seek(0)
@@ -56,7 +56,7 @@ def load_shop():
 def save_pets(pets):
     fieldnames = ["name", "species", "age", "level", "hunger", "happiness", "energy", "status"]
     # updates whole csv with inventory
-    with open(".vscode\pet_simulator.py\pets.csv", "w", newline = "") as pet_csv:
+    with open("pet_simulator/pets.csv", "w", newline = "") as pet_csv:
         writer = csv.DictWriter(pet_csv, fieldnames = fieldnames)
         writer.writeheader()
         writer.writerows(pets)
@@ -65,7 +65,7 @@ def save_pets(pets):
 # load pet csv function:
 def load_pets():
     # opens and saves csv as a list
-    with open(".vscode\pet_simulator.py\pets.csv", "r") as pet_csv:
+    with open("pet_simulator/pets.csv", "r") as pet_csv:
         content = csv.reader(pet_csv)
         row_count = sum(1 for row in content)
         pet_csv.seek(0)
@@ -81,7 +81,7 @@ def load_pets():
 
 def load_other():
     # opens and saves csv as a list
-    with open(".vscode\pet_simulator.py\other.csv", "r") as other_csv:
+    with open("pet_simulator/other.csv", "r") as other_csv:
         content = csv.reader(other_csv)
         row_count = sum(1 for row in content)
         other_csv.seek(0)
@@ -98,7 +98,7 @@ def load_other():
 def save_other(others):
     fieldnames = ["name", "value"]
     # updates whole csv with inventory
-    with open(".vscode\pet_simulator.py\other.csv", "w", newline = "") as other_csv:
+    with open("pet_simulator/other.csv", "w", newline = "") as other_csv:
         writer = csv.DictWriter(other_csv, fieldnames = fieldnames)
         writer.writeheader()
         writer.writerows(others)
