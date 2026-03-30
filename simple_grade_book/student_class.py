@@ -33,9 +33,12 @@ class student:
         grades = {"A" : 94, "A-" : 90, "B+" : 87, "B" : 83, "B-" : 80, "C+" : 77, "C" : 73, "C-" : 70, "D+" : 67, "D" : 60}
         # loops over each grade and if the students average is in range return the corresponding letter grade
         for grade in grades.values:
-              if int(self.average) >= grade:
-                    self.letter = grade.key
-                    break
+            if int(self.average) >= grade:
+                  self.letter = grade.key
+                  break
+            else:
+                  self.letter = "F"
+
     
     def calculate_average(self):
         # calculate average:
