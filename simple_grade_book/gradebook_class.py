@@ -1,11 +1,23 @@
 # mh 1st gradebook class
 
-class gradebook:
-    def __init__(self, students):
+class Gradebook:
+    def __init__(self, students = []):
         self.students = students
+    
+    def add_student(self, student):
+        self.students.append(student)
         
+    def class_summary(self):
+        total = 0
+        count = 0
+        # loops over all students and adds their grades together, then divides by the amount of students
+        for student in self.students:
+                total += student.average
+                count += 1
+        print(f"The class average is {total/count}")
+
     # search by grade, takes in students:
-    def search_grade(self)
+    def search_grade(self):
         letter_grades = ["A","A-","B+","B","B-","C+","C","C-","D+","D","F"]
         students_with_grade = []
         # asks what letter grade they are searching for
@@ -25,7 +37,7 @@ class gradebook:
             print(student)
 
     # search by name, takes in students:
-    def search_name(self)
+    def search_name(self):
         count = 1
         students_with_name = []
         # asks what name they are searching for
@@ -39,10 +51,10 @@ class gradebook:
             print(f"{count}. {student.name}")
         return students_with_name
 
-    # view student record function:
-    def view_record()
+    # view student record function, takes in students:
+    def view_record(self):
         # uses search function to find student they want to view the record of
-        student_list = search_name(self)
+        student_list = self.search_name()
         # asks which student from the list they would like to view the record of
         while True:
             choice = input("Which student would you like to view from the list (input their number): ")
@@ -58,4 +70,4 @@ class gradebook:
     def view_all(self):
         for student in self.students:
         # prints every student and their id, year, average grade, and letter grade
-        print(f"{student.name}: {student.id}, {student.year} Average grade: {student.average} {student.letter}")
+            print(f"{student.name}: {student.id}, {student.year} Average grade: {student.average} {student.letter}")
