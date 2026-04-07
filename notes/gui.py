@@ -18,11 +18,12 @@ tk.Label(root, image = image).pack()
 root.count = 0
 def add():
     root.count += 1
-    tk.Label(root, text = root.count).pack()
+    num["text"] = root.count
     
 btn = tk.Button(root, text = "Add", command = add)
 btn.pack()
-
+num = tk.Label(root, text = "0")
+num.pack()
 label.pack()
 
 root.mainloop()
