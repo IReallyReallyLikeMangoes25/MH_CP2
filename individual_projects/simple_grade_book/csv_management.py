@@ -3,7 +3,7 @@ import csv
 # load csv function:
 def load_csv():
     # opens csv and loops over each line, saving it as a dictionary
-    with open("simple_grade_book/students.csv", "r") as student_csv:
+    with open("individual_projects/simple_grade_book/students.csv", "r") as student_csv:
         content = csv.reader(student_csv)
         row_count = sum(1 for row in content)
         student_csv.seek(0)
@@ -20,7 +20,7 @@ def load_csv():
 def save_csv(students):
     fieldnames = ["name", "id number", "average grade", "letter grade", "standing", "year", "math", "science", "history", "pe", "elective one", "elective two"]
     # loops over csv and dictionary changing every line of the csv to be the same as in the dictionary.
-    with open("simple_grade_book/students.csv", "w", newline = "") as student_csv:
+    with open("individual_projects/simple_grade_book/students.csv", "w", newline = "") as student_csv:
         writer = csv.DictWriter(student_csv, fieldnames = fieldnames)
         writer.writeheader()
         writer.writerows(students)
