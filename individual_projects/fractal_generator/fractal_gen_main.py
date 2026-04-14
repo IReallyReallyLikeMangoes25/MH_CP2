@@ -1,5 +1,5 @@
 # MH first fractal generator main file
-from fractal_generator import draw_fractal
+from fractal_generator.fractal_gen import draw_fractal
 import turtle
 
 # menu function
@@ -27,5 +27,5 @@ def main():
     t.shape("turtle")
     draw_fractal(desired_color, 200, 1, desired_depth, t)
 
-main()
-turtle.done()
+#main()
+#turtle.done()

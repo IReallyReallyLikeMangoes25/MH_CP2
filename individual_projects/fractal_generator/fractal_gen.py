@@ -1,7 +1,7 @@
 # MH 1st fractal generation file
 
-from position_tracker import *
-from triangle_maker import *
+from fractal_generator.position_tracker import *
+from fractal_generator.triangle_maker import *
 
 # function to draw fractal, takes in depth, color, and side length
 def draw_fractal(color, side_length, current_level, desired_level, turtle):

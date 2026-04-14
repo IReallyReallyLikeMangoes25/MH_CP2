@@ -1,7 +1,7 @@
 # MH 1st simple grade book main
-from gradebook_class import *
-from student_class import *
-from csv_management import *
+from simple_grade_book.gradebook_class import *
+from simple_grade_book.student_class import *
+from simple_grade_book.csv_management import *
 
 def main():
     print("Welcome to Mirai's gradebook, for listed choice please input a number.")
@@ -66,4 +66,4 @@ def main():
             print("That is not an option. Please input a number given.")
             continue
 
-main()
+#main()

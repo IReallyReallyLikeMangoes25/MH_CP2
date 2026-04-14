@@ -1,6 +1,6 @@
 # MH 1st pet management functions
 
-from pet_class import pet
+from pet_simulator.pet_class import pet
 # NEEDS:
 # Funtion to create pet
 # Function to view list of pets

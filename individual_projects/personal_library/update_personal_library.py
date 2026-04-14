@@ -55,7 +55,7 @@ def update(rocks):
 # add load csv function
 def load_csv():
     # loops over csv and converts lines into dictionaries
-    with open("individual_projects/collection.csv", "r") as collection:
+    with open("individual_projects\personal_library\collection.csv", "r") as collection:
         content = csv.reader(collection)
         row_count = sum(1 for row in content)
         collection.seek(0)
@@ -72,7 +72,7 @@ def load_csv():
 def save_changes(rocks):
     fieldnames = ["Name", "Category", "Crystal System", "Formula"]
     # loops over csv and dictionary changing every line of the csv to be the same as in the dictionary.
-    with open("individual_projects/collection.csv", "w", newline = "") as collection:
+    with open("individual_projects\personal_library\collection.csv", "w", newline = "") as collection:
         writer = csv.DictWriter(collection, fieldnames = fieldnames)
         writer.writeheader()
         writer.writerows(rocks)
@@ -162,4 +162,4 @@ def menu():
             print("That is not an option.")
             continue
 
-menu()
+#menu()
