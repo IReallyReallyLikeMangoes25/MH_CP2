@@ -1,3 +1,3 @@
 name,id number,average grade,letter grade,standing,year,math,science,history,pe,elective one,elective two
 John,123,11.0,F,Needs Improvement,No registered year yet,66.0,0.0,0.0,0.0,0.0,0.0
-Bob,456,0,No letter grade yet,No standing yet,No registered year yet,0,0,0,0,0,0
+Bob,456,0.0,No letter grade yet,No standing yet,No registered year yet,0.0,0.0,0.0,0.0,0.0,0.0

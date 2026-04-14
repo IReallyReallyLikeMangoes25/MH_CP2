@@ -1,12 +1,12 @@
 # MH 1st pet simulator main
-from pet_management import *
-from interactions import *
-from csv_management import *
-from pet_class import *
-from pet_shop import *
-from work import *
-from time_management import *
-from events import *
+from pet_simulator.pet_management import *
+from pet_simulator.interactions import *
+from pet_simulator.csv_management import *
+from pet_simulator.pet_class import *
+from pet_simulator.pet_shop import *
+from pet_simulator.work import *
+from pet_simulator.time_management import *
+from pet_simulator.events import *
 import random
 
 species = ["Earth mouse", "North Noxian speiglehoof", "Common tentacle entity", "Urnoctan Gizard muncher", "Stair - creeping plastog", "Livnertian wallox"]
@@ -158,6 +158,6 @@ def main(species):
     return others
     # if the user chooses to quit stop running the code
 
-others = main(species)
-save_other(others)
+"""others = main(species)
+save_other(others)"""
 
