@@ -41,11 +41,68 @@ def backup_csv(data):
         writer.writerows(data)
 
 def load_df():
-    pass
+    df = pd.DataFrame()
+    df.read_csv("individual_projects/update_character_manager/characters.csv")
+    df["characters"] = df["characters"].map(json.loads)
+    df["characters"] = df["characters"].to_dict
+    return df["characters"]
+
 def save_df(characters):
     # converts all characters to a dataframe
-    df = pd.DataFrame(characters.values(), columns = ["characters"])
-    df["characters"] = df["characters"].apply(list)
-    df["characters"] = df["characters"].map(json.dumps)
+    #df = pd.DataFrame({'characters': list(characters.values())}, index = characters.keys())
+    keys = list(characters.keys())
+    values = list(characters.values())
+    row_data = []
+    for i in range(len(keys)):
+        row_data.append([keys[i], values[i]])
+    df = pd.DataFrame(row_data, columns = ["names", "characters"])
+    #df["characters"] = df["characters"].apply(list)
+    #df["characters"] = df["characters"].map(json.dumps)
     # takes the character names and saves them in a csv
-    df.to_csv("individual_projects\update_character_manager\characters.csv", index = False)
+    df.to_csv("individual_projects/update_character_manager/characters.csv")
+
+def test():
+    characters = {
+    # FOR ALL CHARACTERS
+    # race and class stored in tuple
+    # skills stored a set
+    # atributtes in nested dictionary
+    # inventory in list
+    "example_char" : {
+        "race" : ("Dragonborn"),
+        "class" : ("White Mage"),
+        "level" : 10,
+        "atributtes" : {
+            "MP" : 1,
+            "HP" : 2,
+            "Str" : 3,
+            "Atk" : 4,
+            "Def" : 5,
+            "Mag" : 6,
+            "Spr" : 7,
+            "Acc" : 8,
+            "Spd" : 9,
+            "Evs" : 10
+        },
+        "skills" : {"Cure", "Esuna"},
+        "inventory" : {
+            "weapon" : ["Wand"],
+            "armor" : ["Robes"],
+            "equipment one" : ["Classic Italian Pizza"],
+            "equipment two" : ["Pot of Petunias"],
+            "equipment three" : ["Bowling Pin"],
+            "equipment four" : ["Sticky Hand"]
+        },
+        "info" : {
+            "quest" : "none",
+            "backstory" : "none",
+            "description" : "none",
+            "trait 1" : "none",
+            "trait 2" : "none", 
+            "trait 3" : "none"
+            }
+        }
+    }
+    save_df(characters)
+
+test()
