@@ -7,11 +7,11 @@ class DataVisualization:
     pass
     # radar graph function
     def radar_graph(self):
-        titles = ["Attack", "Defense", "Magic", "Speed", "Health"]
-        for character in self:
-            stats = [character["attack"], character["defense"], character["magic"], character["speed"], character["health"]]
+        titles = ["MP", "HP", "Str", "Atk", "Def", "Mag", "Spr", "Acc", "Spd", "Evs"]
+        for character in self.data:
+            stats = [character["MP"], character["HP"], character["Str"], character["Atk"], character["Def"], character["Mag"], character["Spr"], character["Acc"], character["Spd"], character["Evs"]]
             # converts degrees to radians
-            angles = angles = [math.radians(a) for a in [0, 60, 120, 180, 240, 300]]
+            angles = angles = [math.radians(a) for a in [0, 60, 120, 180, 240, 300, 360, 420, 480, 540]]
             # adds first index of a list to the end so the polygon will close
             angles += [angles[0]]
             stats += [stats[0]]
@@ -28,11 +28,11 @@ class DataVisualization:
 
     # bar graph function
     def bar_graph(self):
-        positions = [0, 3, 6, 9, 12]
-        for character in self:
+        positions = [0, 3, 6, 9, 12, 15, 18, 21, 24, 27]
+        for character in self.data:
             # creates bars with height corresponding to how high the stat is for every stat
-            stats = [character["attack"], character["defense"], character["magic"], character["speed"], character["health"]]
-            titles = ["Attack", "Defense", "Magic", "Speed", "Health"]
+            stats = [character["MP"], character["HP"], character["Str"], character["Atk"], character["Def"], character["Mag"], character["Spr"], character["Acc"], character["Spd"], character["Evs"]]
+            titles = ["MP", "HP", "Str", "Atk", "Def", "Mag", "Spr", "Acc", "Spd", "Evs"]
             fig, ax = plt.subplots()
             ax.bar(positions, stats, label = character["name"])
             ax.set_xticks(positions)

@@ -17,9 +17,51 @@ class RandomGenerator:
         # updates character backstory and name
         self["backstory"] = backstory
         self["name"] = name
+    
+    def gen_base_info(self):
+        races = ["Human", "Dragonborn", "Halfling", "Elf", "Ogre", "Dwarf", "Tiefling"]
+        classes = ["Black Mage", "Warrior", "Thief", "White Mage"]
+        self["race"] = Faker.random_element(races)
+        self["class"] = Faker.random_element(classes)
+        return self["class"]
 
     def to_dict(self):
-        return {"name" : self["name"],"race" : self["race"],"class" : self["class"],"level" : 0,"attack" : 0,"defense" : 0,"magic" : 0,"speed" : 0,"health" : 0,"item slot 1" : self["item slot 1"],"item slot 2" : self["item slot 2"],"item slot 3" : self["item slot 3"],"item slot 4" : self["item slot 4"],"weapon" : self["weapon"],"armor" : self["armor"],"backstory" : self["backstory"],"quest" : self["quest"],"description" : self["description"],"trait 1" : self["trait 1"],"trait 2" : self["trait 2"],"trait 3" : self["trait 3"]}
+        char = {
+        "race" : (self["race"]),
+        "class" : (self["class"]),
+        "level" : 0,
+        "atributtes" : {
+            "MP" : 0,
+            "HP" : 0,
+            "Str" : 0,
+            "Atk" : 0,
+            "Def" : 0,
+            "Mag" : 0,
+            "Spr" : 0,
+            "Acc" : 0,
+            "Spd" : 0,
+            "Evs" : 0
+        },
+        "skills" : {"None yet", "None yet"},
+        "inventory" : {
+            "weapon" : [self["weapon"]],
+            "armor" : [self["robes"]],
+            "equipment one" : [self["item 1"]],
+            "equipment two" : [self["item 2"]],
+            "equipment three" : [self["item 3"]],
+            "equipment four" : [self["item 4"]]
+        },
+        "info" : {
+            "quest" : self["quest"],
+            "backstory" : self["backstory"],
+            "description" : self["description"],
+            "trait 1" : self["trait 1"],
+            "trait 2" : self["trait 2"], 
+            "trait 3" : self["trait 3"]
+        }
+    }
+
+        return self["name"], char 
     # generate character traits:
     def gen_traits(self):
         # list of character traits
@@ -44,15 +86,20 @@ class RandomGenerator:
         self["description"] = f"They are {Faker.random_element(height)} with {hair} hair, {eyes} eyes, and are {age} years old."
 
     # generate inventory, takes in available items:
-    def gen_inventory(self, armors, weapons, other):
+    def gen_inventory(self, armors, weapons, other, other_2, other_3):
         armor = Faker.random_element(armors)
         weapon = Faker.random_element(weapons)
         item_1 = Faker.random_element(other)
-        item_2 = Faker.random_element(other)
-        item_3 = Faker.random_element(other)
+        item_2 = Faker.random_element(other_2)
+        item_3 = Faker.random_element(other_3)
         item_4 = Faker.random_element(other)
         # takes random items from each section of the available items and returns them
-        return weapon, armor, item_1, item_2, item_3, item_4
+        self["weapon"] = weapon
+        self["armor"] = armor
+        self["item 1"] = item_1
+        self["item 2"] = item_2
+        self["item 3"] = item_3
+        self["item 4"] = item_4
 
     # generate quest:
     def gen_quest(self):

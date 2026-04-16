@@ -1,7 +1,7 @@
 # MH 1st character management
 
 from skill_stat_manager import setup_char_value, get_stats_for_class
-from inventoryWUI import new_inven, edit_inven, migrate_inventories, find_item_by_name
+from inventoryWUI import new_inven, edit_inven, migrate_inventories, find_item_by_name, items
 from character_search import check_char, dict_display
 
 # dictionary to contain all characters
@@ -170,3 +170,6 @@ def edit_character(character_dictionary):
             break
     # return the updated dictionary
     return character_dictionary
+
+def return_items():
+    return items

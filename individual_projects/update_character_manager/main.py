@@ -1,5 +1,5 @@
 #Import other files for functions
-from char_manager import create_character, edit_character
+from char_manager import create_character, edit_character, return_items
 from character_search import char_search
 from random_generator import *
 from visualize_data import *
@@ -7,48 +7,11 @@ from csv_management import *
 from statistic_analysis import *
 
 # dictionary to contain all characters
-characters = {
     # FOR ALL CHARACTERS
     # race and class stored in tuple
     # skills stored a set
     # atributtes in nested dictionary
     # inventory in list
-    "example_char" : {
-        "race" : ("Dragonborn"),
-        "class" : ("White Mage"),
-        "level" : 10,
-        "atributtes" : {
-            "MP" : 1,
-            "HP" : 2,
-            "Str" : 3,
-            "Atk" : 4,
-            "Def" : 5,
-            "Mag" : 6,
-            "Spr" : 7,
-            "Acc" : 8,
-            "Spd" : 9,
-            "Evs" : 10
-        },
-        "skills" : {"Cure", "Esuna"},
-        "inventory" : {
-            "weapon" : ["Wand"],
-            "armor" : ["Robes"],
-            "equipment one" : ["Classic Italian Pizza"],
-            "equipment two" : ["Pot of Petunias"],
-            "equipment three" : ["Bowling Pin"],
-            "equipment four" : ["Sticky Hand"]
-        },
-        "info" : {
-            "quest" : "none",
-            "backstory" : "none",
-            "description" : "none",
-            "trait 1" : "none",
-            "trait 2" : "none", 
-            "trait 3" : "none"
-        }
-    }
-}
-
 
 # tuple of races
     # tuple that contians all available races
@@ -59,35 +22,41 @@ race_options = ("Human", "Dragonborn", "Halfling", "Elf", "Ogre", "Dwarf", "Tief
 class_options = ("Black Mage", "Warrior", "Thief", "White Mage")
 
 #Define main
-def main():
+def main(race_options, class_options):
     print("Welcome to the RPG Character Manager. You can create, edit, and search for characters here.")
     while True:
-        characters = load_csv()
+        characters = load_df()
         choice = input("What would you like to do?\n1. Create a new character\n2. Edit an already made character\n3. Search/filter characters\n4. Generate new character\n5. Analyze character stats\n6. Visualize character data\n7.Exit\n")
         if choice == '1':
             characters = create_character(characters, race_options, class_options)
-            save_csv(characters)
+            save_df(characters)
         elif choice == '2':
             characters = edit_character(characters)
-            save_csv(characters)
+            save_df(characters)
         elif choice == '3':  
             char_search(characters)
         elif choice == '4':
-            generator = RandomGenerator({"name" : None, "race" : None, "class" : None, "level" : None, "attack" : None, "defense" : None, "magic" : None, "speed" : None, "health" : None, "item slot 1" : None, "item slot 2" : None, "item slot 3" : None, "item slot 4" : None, "weapon" : None, "armor" : None, "backstory" : None, "quest" : None, "description" : None, "trait 1" : None, "trait 2" : None, "trait" : None})
+            generator = RandomGenerator({'race': None, 'class': None, 'level': 0, 'atributtes': {'MP': 0, 'HP': 0, 'Str': 0, 'Atk': 0, 'Def': 0, 'Mag': 0, 'Spr': 0, 'Acc': 0, 'Spd': 0, 'Evs': 0}, 'skills': {None, None}, 'inventory': {'weapon': [None], 'armor': [None], 'equipment one': [None], 'equipment two': [None], 'equipment three': [None], 'equipment four': [None]}, 'info': {'quest': None, 'backstory': None, 'description': None, 'trait 1': None, 'trait 2': None, 'trait 3': None}})
+            items = return_items
+            char_class = generator.gen_base_info
             generator.gen_backstory
             generator.gen_description
-            generator.gen_inventory
+            generator.gen_inventory(items[char_class]["Armor"], items[char_class]["Weapons"], items["Equipment"], items["Two"], items["Three"])
             generator.gen_quest
             generator.gen_traits
             characters.append(generator)
-            save_csv(characters)
+            save_df(characters)
 
         elif choice == '5':
             while True:
-                choice = input("How would you like to analyze your character data?\n1. View metrics across roster\n2. Comapre characters stats\n")
+                choice = input("How would you like to analyze your character data?\n1. View metrics across roster\n2. Comapre characters stats\n3. Quit\n")
                 if choice == "1":
-                    analyzer = Statisticalanalyzer(characters)
-                    analyzer.generate_report
+                    recents = []
+                    for key, value in characters.items():
+                        if "_" not in key:
+                            recents.append(value)
+                    analyzer = Statisticalanalyzer(recents)
+                    analyzer.generate_report()
 
                 elif choice == "2":
                     to_compare = []
@@ -99,11 +68,13 @@ def main():
                         else:
                             break
                     amount = int(amount)
-                    for i in amount:
+                    for i in range(amount):
                         character = char_search(characters)
                         to_compare.append(character)
                     analyzer = Statisticalanalyzer(to_compare)
-                    analyzer.generate_report
+                    analyzer.generate_report(to_compare)
+                elif choice == "3":
+                    break
                 else:
                     continue
         elif choice == '6':
@@ -119,7 +90,7 @@ def main():
                         else:
                             break
                     amount = int(amount)
-                    for i in amount:
+                    for i in range(amount):
                         character = char_search(characters)
                         to_graph.append(character)
                     char_visualize = DataVisualization(to_graph)
@@ -134,7 +105,7 @@ def main():
                         else:
                             break
                     amount = int(amount)
-                    for i in amount:
+                    for i in range(amount):
                         character = char_search(characters)
                         to_graph.append(character)
                     char_visualize = DataVisualization(to_graph)
@@ -177,4 +148,4 @@ def char_return(characters):
     return characters
 
 #Run Main
-main()
+main(race_options, class_options)
