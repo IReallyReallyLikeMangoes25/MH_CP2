@@ -136,6 +136,23 @@ def make_stat_modifier(bonuses):
 
 
 def setup_char_value(characters, target_name=None):
+    def count_char(characters, target_name):
+        instances = []
+        for character in characters:
+            if target_name == character["name"].split("_")[0]:
+                instances.append(character)
+        return instances
+    
+    def add_new(characters, target_name, final_stats):
+        instances = count_char(characters, target_name)
+        last_entry = characters[target_name]
+        updated_key = f"{target_name}_{len(instances) + 1}"
+        characters[updated_key] = last_entry
+        characters.pop(target_name)
+        to_add = last_entry
+        to_add['Atributes'] = final_stats
+        characters[target_name] = to_add
+        return characters
 
     # Stores manual stat edits
     added_dic = {
@@ -250,7 +267,8 @@ def setup_char_value(characters, target_name=None):
         final_stats['Lvl'] = base['Lvl'] + added_dic['Stats']['Lvl']
 
         # Save final stats back to character (use existing 'atributtes' key used elsewhere)
-        char[name]['atributtes'] = final_stats
+        char = add_new(char, name, final_stats)
+        
 
         editing = input("Still editing? (y/n)\n> ").lower()
         if editing != "y":
